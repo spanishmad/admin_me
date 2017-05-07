@@ -1,0 +1,59 @@
+<html lang="en">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="/js/application.js"></script>
+
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+</head>
+<body>
+
+	<div ng-app="myMovieList" ng-controller="homeCtrl">
+	
+		<form novalidate class="simple-form">
+		
+			<label>Id: <input type="text" ng-model="movie.id" /></label><br />
+			<label>Title: <input type="text" ng-model="movie.title" /></label><br />
+			<label>Description: <input type="text" ng-model="movie.description" /></label><br />
+			Rating: <label><input type="radio" ng-model="movie.rating" value="1" />1</label>
+			<label><input type="radio" ng-model="movie.rating" value="2" />2</label>
+			<label><input type="radio" ng-model="movie.rating" value="3" />3</label>
+			<label><input type="radio" ng-model="movie.rating" value="4" />4</label>
+			<label><input type="radio" ng-model="movie.rating" value="5" />5</label><br />
+			<input type="reset" ng-click="resetMovie()" value="Reset" />
+			<input type="submit" ng-click="createMovie(movie)" value="Create Movie" ng-show="!movie._id" />
+			<input type="submit" ng-click="updateMovie(movie)" value="Update Movie" ng-show="movie._id"/>
+					
+			<div ng-show="movies.length">
+					<p>My movies are: {{movies.length }}</p>
+					<table border="1">
+						<tr>
+							<th>Id</th>
+							<th>Title</th>
+							<th>Rating</th>
+							<th>Released</th>
+							<th>Actions</th>
+						</tr>
+						<tr ng-repeat="movie in movies | orderBy: '-rating'">
+							<td>{{movie.id}}</td>
+							<td>{{movie.title}}</td>
+							<td>{{movie.rating}}</td>
+							<td>{{movie.released}}</td>
+							<td>
+								<input type="submit" ng-click="editMovie(movie)" value="Edit Movie" />
+								<input type="submit" ng-click="deleteMovie(movie)" value="Delete Movie" />
+							</td>
+						</tr>
+						
+						
+					</table>
+			</div>
+		
+		</form>
+		
+	</div>
+	
+</body>
+</html>
